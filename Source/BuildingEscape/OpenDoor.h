@@ -27,7 +27,7 @@ protected:
 	void OpenDoor();
 	void CloseDoor();
 
-public:	
+private:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UPROPERTY(EditAnywhere)
