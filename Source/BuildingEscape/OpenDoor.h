@@ -33,6 +33,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		float OpenAngle = -90.0f;
 
+	//Trigger volume : opens the door in case of overlap
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* PressurePlate;
 

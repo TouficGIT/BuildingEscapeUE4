@@ -14,6 +14,7 @@ UPositionReporter::UPositionReporter()
 
 
 // Called when the game starts
+// Get the current location of the Owner and display it in a Log msg
 void UPositionReporter::BeginPlay()
 {
 	Super::BeginPlay();

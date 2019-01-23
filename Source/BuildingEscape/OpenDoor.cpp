@@ -21,6 +21,7 @@ void UOpenDoor::BeginPlay()
 	ActorThatOpen = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
+//Open the door : 90 degrees
 void UOpenDoor::OpenDoor()
 {
 	//Set the door rotation
