@@ -1,6 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "Grabber.h"
+
+#define OUT
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -18,7 +21,6 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 	Owner = GetOwner();
-	ActorThatOpen = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 //Open the door : 90 degrees
@@ -40,8 +42,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	//Poll the trigger volume
-	//if the ActorThatOpen is in the trigger volume 
-	if (PressurePlate->IsOverlappingActor(ActorThatOpen))
+	if (GetTotalMassOfActorsOnPLate() > 30.f) //TODO make into a parameter 
 	{
 		OpenDoor();
 		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
@@ -57,3 +58,23 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
 }
 
+float UOpenDoor::GetTotalMassOfActorsOnPLate()
+{
+	float TotalMass = 0.f;
+
+	// find all the overlapping actors
+	TArray<AActor*> OverlappingActors;
+	PressurePlate->GetOverlappingActors(OUT OverlappingActors);
+
+	for (const auto& Actor : OverlappingActors)
+	{
+		TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+		UE_LOG(LogTemp, Warning, TEXT("%s is on pressure plate"), *Actor->GetName())
+
+	}
+
+	
+	// iterate through them adding their masses
+
+	return TotalMass;
+}
