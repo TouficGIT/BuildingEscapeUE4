@@ -35,14 +35,14 @@ private:
 
 	//Trigger volume : opens the door in case of overlap
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate;
+		ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 		float DoorCloseDelay = 1.0f;
 
 	float LastDoorOpenTime;
 
-	AActor* Owner; // The owning door
+	AActor* Owner = nullptr; // The owning door
 
 	// Return total mass in kilogram
 	float GetTotalMassOfActorsOnPLate();
